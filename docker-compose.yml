@@ -13,7 +13,8 @@ services:
       start_period: 1m
 
   initializer:
-    image: vitalie97/mapping-service-initializer:v.1.0.3
+    #image: vitalie97/mapping-service-initializer:v.1.0.3
+    build: ./initializer
     depends_on:
       mapping-service:
         condition: service_healthy
