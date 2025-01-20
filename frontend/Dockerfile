@@ -7,12 +7,15 @@ RUN apt-get update && \
 
 # Clone the entire frontend-collection repository
 FROM base AS frontend-build
-RUN git clone https://github.com/kit-data-manager/frontend-collection.git && \
+#TODO: replace with stable branch after PR with fix
+RUN git clone --single-branch --branch fix_mapping-service-ui_settingsHandling https://github.com/kit-data-manager/frontend-collection.git && \
     # Rename mapping-service-ui.html to index.html
     mv /frontend-collection/mapping-service-ui.html /frontend-collection/index.html
 
 # Copy custom settings file into the cloned repo
-COPY mapping-service.settings.js /frontend-collection/js/mapping-service.settings.js
+COPY mapping-service.settings.js /frontend-collection/settings/mapping-service.settings.js
+
+COPY general.settings.js /frontend-collection/settings/general.settings.js
 
 # Use Nginx to serve the content
 FROM nginx:stable-alpine AS frontend

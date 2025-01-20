@@ -20,7 +20,8 @@ services:
         condition: service_healthy
 
   frontend:
-    image: vitalie97/mapping-service-frontend:v1.0.3
+    #image: vitalie97/mapping-service-frontend:v1.0.3
+    build: ./frontend
     ports:
       - "${MAPPING_FRONTPORT:-80}:80"
     depends_on:
